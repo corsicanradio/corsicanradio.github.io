@@ -1,0 +1,18 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#left_side_1 {
+	position: absolute;
+	left: -250px;
+	top: -250px;
+	bottom: -250px;
+	width: 500px;
+	background: rgba(50, 50, 50, 0.7);
+	
+	-ms-transform: rotate(3deg);
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
+}
