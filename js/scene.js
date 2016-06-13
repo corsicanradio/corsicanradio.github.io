@@ -685,15 +685,31 @@ function Mark404Elem(parent, x, y) {
 }
 
 Mark404Elem.prototype.calcPosDefault = function() {
-	return {
-		posX: -2.2 + (-this.parent.views[0].mouse.worldX / 10.0) + (this.parent.PIECE_SIZE * this.x * 1.2), 
-		posY: 1.2 + (-this.parent.views[0].mouse.worldY / 10.0) - (this.parent.PIECE_SIZE * this.y * 1.2), 
+	var r = {
+		posX: (-this.parent.views[0].mouse.worldX / 10.0) + (this.parent.PIECE_SIZE * this.x * 1.2), 
+		posY: (-this.parent.views[0].mouse.worldY / 10.0) - (this.parent.PIECE_SIZE * this.y * 1.2), 
 		posZ: 0.0,
 		
 		rotX: 0.8, 
 		rotY: 0.8, 
 		rotZ: Math.PI
 	};
+	
+	if (aspectRatio > 1.67) {
+		r.posX += -aspectRatio + 0.1;
+		r.posY += 1.2;
+	}
+	else {
+		r.posY += 1.9;
+		if (aspectRatio > 1) {
+			r.posX += -aspectRatio * 0.8 + 0.6;
+		}
+		else {
+			r.posX += - aspectRatio * 1.4;
+		}
+	}
+	
+	return r;
 }
 
 Mark404Elem.prototype.calcPos = function() {
@@ -884,7 +900,7 @@ $(document).ready(function() {
 		src: "images/phrase1.png",
 		speed: 0.1,
 		calcPos: function() {
-			return {			
+			var r = {			
 				scaleX: 4,
 				scaleY: 1,
 				scaleZ: 1,
@@ -893,6 +909,17 @@ $(document).ready(function() {
 				posY: 0.5 - ((mainView.mouse.worldY - 0.5) * 0.15),
 				posZ: 0.0
 			};
+			
+			if (aspectRatio < 1.67) {
+				r.posY -= 0.5 ;
+			}
+			
+			if (aspectRatio < 1.33) {
+				r.scaleX *= (Math.pow(aspectRatio, 0.8));
+				r.scaleY *= (Math.pow(aspectRatio, 0.8));
+			}
+			
+			return r;
 		}
 	});
 	
@@ -900,7 +927,7 @@ $(document).ready(function() {
 		src: "images/phrase2.png",
 		speed: 0.2,
 		calcPos: function() {
-			return {
+			var r = {
 				scaleX: 4,
 				scaleY: 1,
 				scaleZ: 1,
@@ -909,6 +936,16 @@ $(document).ready(function() {
 				posY: 0.2 - (mainView.mouse.worldY * 0.15),
 				posZ: 0
 			};
+			
+			if (aspectRatio < 1.67) {
+				r.posY -= 0.5 ;
+			}
+			
+			if (aspectRatio < 1.33) {
+				r.scaleX *= (Math.pow(aspectRatio, 0.8));
+				r.scaleY *= (Math.pow(aspectRatio, 0.8));
+			}
+			return r;
 		}
 	});
 	
@@ -916,7 +953,7 @@ $(document).ready(function() {
 		src: "images/phrase3.png",
 		speed: 0.08,
 		calcPos: function() {
-			return {
+			var r = {
 				scaleX: 4,
 				scaleY: 1,
 				scaleZ: 1,
@@ -925,6 +962,16 @@ $(document).ready(function() {
 				posY: -0.3 - ((mainView.mouse.worldY - 0.3) * 0.15),
 				posZ: 0
 			};
+			
+			if (aspectRatio < 1.67) {
+				r.posY -= 0.5 ;
+			}
+			
+			if (aspectRatio < 1.33) {
+				r.scaleX *= (Math.pow(aspectRatio, 0.8));
+				r.scaleY *= (Math.pow(aspectRatio, 0.8));
+			}
+			return r;
 		}
 	});
 	

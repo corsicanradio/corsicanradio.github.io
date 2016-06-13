@@ -16,3 +16,15 @@ html, body {
     -webkit-transform: rotate(3deg);
     transform: rotate(3deg);
 }
+
+@media (max-width: 730px) {
+	#left_side_1 {
+		left: -350px;
+	}
+}
+
+@media (max-width: 730px) {
+	#left_side_1 {
+		display: none;
+	}
+}
