@@ -437,20 +437,16 @@ ConnectedVerticle.prototype.addNeighbor = function(cv) {
 }
 
 ConnectedVerticle.prototype.laplasianSmooth = function() {
-	if (this.is_border == true) {
+	if ((this.is_border == true)) {
 		return;
 	}
 	
 	q = new THREE.Vector3();
 	q.copy(this);
-	for (x in this.neighbors) {
-		q.add(this.neighbors[x]);
-	}
-	
-	var l = this.neighbors.length + 1;
-	q.x /= l;
-	q.y /= l;
-	q.z /= l;
+	q.add(this.neighbors[0]).add(this.neighbors[1]).add(this.neighbors[2]).add(this.neighbors[3]).add(this.neighbors[4]).add(this.neighbors[5]);
+	q.x /= 7;
+	q.y /= 7;
+	q.z /= 7;
 	
 	if (q.distanceTo(this) > 0.01) {
 		this.x += (q.x - this.x) * 0.7;
@@ -458,13 +454,13 @@ ConnectedVerticle.prototype.laplasianSmooth = function() {
 		this.z += (q.z - this.z) * 0.7;
 	}
 	
-	for(x in this.force) {
-		if (this.is_border == false) {
-			this.x += (this.force[x].x - this.x) * 0.002;
-			this.z += (this.force[x].z - this.z) * 0.002;
-		}
-		this.y += this.force[x].speed * Math.max(1.0 - Math.sqrt(Math.pow(this.x - this.force[x].x, 2) + Math.pow(this.z - this.force[x].z, 2)), 0.0) * 0.01;
-	}
+	this.x += (this.force[0].x - this.x) * 0.002;
+	this.z += (this.force[0].z - this.z) * 0.002;
+	this.y += this.force[0].speed * Math.max(1.0 - Math.sqrt(Math.pow(this.x - this.force[0].x, 2) + Math.pow(this.z - this.force[0].z, 2)), 0.0) * 0.01;
+	
+	this.x += (this.force[1].x - this.x) * 0.002;
+	this.z += (this.force[1].z - this.z) * 0.002;
+	this.y += this.force[1].speed * Math.max(1.0 - Math.sqrt(Math.pow(this.x - this.force[1].x, 2) + Math.pow(this.z - this.force[1].z, 2)), 0.0) * 0.01;
 }
 
 /* --------------------------------------------------------------------------------------------------- */
