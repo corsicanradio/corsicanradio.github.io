@@ -1012,6 +1012,22 @@ $(document).ready(function() {
 	
 	postView = new PostView(mainView);
 	start();
+	
+	document.body.addEventListener("mousemove", function(e) {
+		mainView.onMove(e.pageX, e.pageY);
+	});
+
+	document.body.addEventListener("touchmove", function(e) {
+		mainView.onMove(e.touches.item(0).pageX, e.touches.item(0).pageY);
+	});
+	
+	document.body.addEventListener("mousedown", function(e) {
+		mainView.mouseClickPrevCycle = true;
+	});
+	
+	document.body.addEventListener("touchstart", function(e) {
+		mainView.mouseClickPrevCycle = true;
+	});
 });
 
 $(window).resize(function() {	
@@ -1022,12 +1038,6 @@ $(window).resize(function() {
 	postView.onResize();
 });
 
-$(document).on("mousemove", function(event) {	
-	mainView.onMove(event.pageX, event.pageY);
-});
 
-$(document).on("click", function(event) {	
-	mainView.mouseClickPrevCycle = true;
-});
 
 
