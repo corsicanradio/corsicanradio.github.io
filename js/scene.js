@@ -470,9 +470,9 @@ ConnectedVerticle.prototype.laplasianSmooth = function() {
 /* --------------------------------------------------------------------------------------------------- */
 
 Field.prototype = Object.create(SceneObject.prototype);
-Field.prototype.WIDTH = 51;
-Field.prototype.HEIGHT = 51;
-Field.prototype.STEP = 0.2;
+Field.prototype.WIDTH = 25;
+Field.prototype.HEIGHT = 25;
+Field.prototype.STEP = 0.4;
 
 function Field(views, lightSources, type) {
 	SceneObject.call(this, views);
@@ -588,7 +588,7 @@ Field.prototype.beforeRender = function() {
 		if (Math.abs(this.force[x].speed) < 2 * this.force[x].acceleration) {
 			this.force[x].x = Math.random() * 10 - 5;
 			this.force[x].z = Math.random() * 10 - 5;
-			this.force[x].speed = -10.0 * Math.random() * Math.sign(Math.random() - 0.5);
+			this.force[x].speed = -15.0 * Math.random() * Math.sign(Math.random() - 0.5);
 		}
 		else {
 			if (this.force[x].speed > 0) {
